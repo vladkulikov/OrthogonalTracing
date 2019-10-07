@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrthogonalTracing", "OrthogonalTracing\OrthogonalTracing.csproj", "{EA6EF256-329D-4956-8809-78D329EC0C41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core", "core\core.csproj", "{FAFD5646-859F-4344-A64F-0728662C3879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "algorithm", "algorithm\algorithm.csproj", "{C7D7BC36-5C65-4A9E-A3AC-D11FEBDB5C42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{EA6EF256-329D-4956-8809-78D329EC0C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA6EF256-329D-4956-8809-78D329EC0C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA6EF256-329D-4956-8809-78D329EC0C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAFD5646-859F-4344-A64F-0728662C3879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAFD5646-859F-4344-A64F-0728662C3879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAFD5646-859F-4344-A64F-0728662C3879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAFD5646-859F-4344-A64F-0728662C3879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7D7BC36-5C65-4A9E-A3AC-D11FEBDB5C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D7BC36-5C65-4A9E-A3AC-D11FEBDB5C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D7BC36-5C65-4A9E-A3AC-D11FEBDB5C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D7BC36-5C65-4A9E-A3AC-D11FEBDB5C42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
