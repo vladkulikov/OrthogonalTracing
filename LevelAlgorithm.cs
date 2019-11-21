@@ -17,22 +17,24 @@ namespace algorithm
 			int a = graph.Length;
 			int[] vers = new int[a];
 			int front = 0;
-			int node = pins[0][0]; 
+			int node1 = pins[0][0];
+			int node2 = pins[0][1];
+
 			for (int i = 0; i < a; i++)
 			{
 				
 				vers[i] = -1;
 			}
 
-			vers[node] = front;
+			vers[node1] = front;
 
-			for (; vers[pins[0][0]] < 0; )
+			for (; vers[pins[0][1]] < 0; )
 			{
 				for (int i = 0; i < graph.Length; i++)
 				{
 					if (vers[i] == front)
 					{
-						for (int j = 0; i < graph[j].Length; j++)
+						for (int j = 0; j < graph[i].Length; j++)
 						{
 							vers[j] = front + 1;
 						}
@@ -41,6 +43,32 @@ namespace algorithm
 				front++;
 			}
 
+			int way = front--;
+
+			List<int> optway = new List<int>(way);
+			
+			int v = node2;
+			front = vers[node2];
+			
+			for (; front != 0;)
+			{
+				for (int i = 0; i < graph[v].Length; i++)
+				{
+					if (vers[graph[v][i]] == front - 1) {
+						
+						optway.Add(graph[v][i]);
+						v = graph[v][i];
+						break;
+					}
+				}
+				front--;
+			}
+			optway.Reverse();
+			for (int i = 0; i < optway.Count; i++)
+			{
+				tracks[0][i] = optway[i];
+			}
+			
 
 
 			return new Solution(net.Pins, tracks);
