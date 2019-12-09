@@ -11,8 +11,71 @@ namespace algorithm
     {
         public Solution trace(Net net)
         {
-            int[][] tracks = new int[net.Pins.Length][];
 
+
+
+            int[][] tracks = new int[net.Pins.Length][];
+            int[][] pins = net.Pins;
+            int[][] graph = net.Graph;
+            int a = graph.Length;
+            int[] vers = new int[a];
+
+            int node1 = pins[0][0];
+            int node2 = pins[0][1];
+            List<int> track = new List<int>();
+            List<int> top = new List<int>();
+            top.Add(node1);
+            List<int> previoustop = new List<int>();
+            previoustop.Add(-1);
+
+            for (int i = 0; i < a; i++)
+            {
+                vers[i] = -1;
+            }
+
+            vers[node1] = 0;
+
+
+            //распространение волны
+            for (int i = 0; i < a; i++)
+            {
+                if (top[i] == node2)
+                {
+                    break;
+                }
+                for (int j = 0; j < graph[top[i]].Length; j++)
+                {
+                    if (vers[graph[top[i]][j]] == -1)
+                    {
+                        vers[graph[top[i]][j]] = 0;
+                        top.Add(graph[top[i]][j]);
+                        previoustop.Add(top[i]);
+                    }
+
+                }
+            }
+
+
+            //обратный ход
+            track.Add(node2);
+            for (int i = 0; i < top.Count; i++)
+            {
+
+                int pos = top.IndexOf(track[i]);
+                track.Add(previoustop[pos]);
+                if (previoustop[pos] == node1)
+                {
+                    break;
+                }
+
+            }
+
+            track.Reverse();
+            tracks[0] = new int[track.Count];
+            for (int i = 0; i < track.Count; i++)
+            {
+                tracks[0][i] = track[i];
+            }
             return new Solution(net.Pins, tracks);
         }
 
@@ -67,5 +130,58 @@ namespace algorithm
             }
             return result;
         }
+
+        public static Solution searchSolution(Net net) {
+            int[][] pins = net.Pins;
+            int[][] tracks = new int[net.Pins.Length][];
+            int[][] graph = net.Graph;
+            int a = graph.Length;
+            int[,] vers = new int[2,a];
+            int[] optway = new int[a];
+            for (int i = 0; i < a; i++)
+            {
+                vers[0, i] = i;
+                vers[1, i] = -1;
+                optway[i] = 0; 
+            }
+            
+            int pin1 = pins[0][0];//пины которые нуно соединить
+            int pin2 = pins[0][1];//пины которые нуно соединить
+            int d;
+            //vers[1, 0] = 0;
+            for (int i = 0; i < a; i++)                        
+            {
+                if (graph[i].Length != 0)
+                {
+                    d = vers[1, i] + 1;
+                    for (int j = 0; j < graph[i].Length; j++)
+                    {
+                        if (vers[1, graph[i][j]] == -1)
+                        {
+                            vers[1, graph[i][j]] = d;
+                        }
+
+                    }
+                }
+            }
+            int v = vers[1, pin1];
+            int k = 0;
+            for (int j = pin1; j != pin2; )                        
+            {
+                for (int i = 0; i < graph[j].Length; i++)    
+                {
+                    if (vers[1, graph[j][i]] == v - 1) { optway[k] = graph[j][i]; break; }                                
+                }
+                j = optway[k];
+                v = vers[1, optway[k]];
+                k++;
+            }                                                    
+            
+
+            return new Solution(pins, tracks);
+        }
+
+        
+
     }
 }
