@@ -27,8 +27,8 @@ namespace algorithm
 			}
 
 			vers[node1] = front;
-
-			for (; vers[pins[0][1]] < 0; )
+			//распространение волны
+			for (; vers[node2] < 0; )
 			{
 				for (int i = 0; i < graph.Length; i++)
 				{
@@ -36,7 +36,10 @@ namespace algorithm
 					{
 						for (int j = 0; j < graph[i].Length; j++)
 						{
-							vers[j] = front + 1;
+							if (vers[graph[i][j]] == -1)
+							{
+								vers[graph[i][j]] = front + 1;
+							}
 						}
 					}
 				}
@@ -48,9 +51,10 @@ namespace algorithm
 			List<int> optway = new List<int>(way);
 			
 			int v = node2;
-			front = vers[node2];
 			
-			for (; front != 0;)
+			front = vers[node2];
+			//обратнй ход поиск пути
+			for (; front >  0;)
 			{
 				for (int i = 0; i < graph[v].Length; i++)
 				{
@@ -60,10 +64,12 @@ namespace algorithm
 						v = graph[v][i];
 						break;
 					}
+
 				}
 				front--;
 			}
 			optway.Reverse();
+			tracks[0] = new int[way];
 			for (int i = 0; i < optway.Count; i++)
 			{
 				tracks[0][i] = optway[i];
