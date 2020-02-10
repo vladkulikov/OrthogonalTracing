@@ -16,19 +16,24 @@ namespace OrthogonalTracing
 
         static void Main(string[] args)
         {
-			
 
 
-            Net  test = Parser.getData("C:/Users/USER/Desktop/OrthogonalTracing-WaveMethod/OrthogonalTracing/testproject.txt");
-
-            Solution decision = Parser.getSolution("C:/Users/USER/Desktop/OrthogonalTracing-WaveMethod/OrthogonalTracing/testproject.txt");
-			LevelAlgorithm alg = new LevelAlgorithm();
+            Net test = Parser.getData("/media/vldad/708A70F28A70B5E6/test2.txt");
+            Solution decision = Parser.getSolution("/media/vldad/708A70F28A70B5E6/test2.txt");
+            //Net  test = Parser.getData("C:/Users/USER/Desktop/OrthogonalTracing-WaveMethod/OrthogonalTracing/testproject.txt");
+            //Solution decision = Parser.getSolution("C:/Users/USER/Desktop/OrthogonalTracing-WaveMethod/OrthogonalTracing/testproject.txt");
+            LevelAlgorithm alg = new LevelAlgorithm();
 			Solution sol = alg.trace(test);
-			for (int i = 0; i < sol.Tracks[0].Length; i++)
-			{
-				Console.WriteLine(sol.Tracks[0][i]);
-			}
-            
+
+
+            for (int i = 0; i < sol.Pins.Length; i++)
+            {
+                Console.WriteLine($"Трасса {i + 1}:");
+                for (int j = 0; j < sol.Tracks[i].Length; j++)
+                {
+                    Console.WriteLine(sol.Tracks[i][j]);
+                }
+            }
 
 			Console.ReadKey();
         }

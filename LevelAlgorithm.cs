@@ -11,73 +11,79 @@ namespace algorithm
     {
         public Solution trace(Net net)
         {
+
+
+
             int[][] tracks = new int[net.Pins.Length][];
-			int[][] pins = net.Pins;
-			int[][] graph = net.Graph;
-			int a = graph.Length;
-			int[] vers = new int[a];
-			int front = 0;
-			int node1 = pins[0][0];
-			int node2 = pins[0][1];
+            int[][] pins = net.Pins;
+            int[][] graph = net.Graph;
+            int a = graph.Length;
+            int[] vers = new int[a];
 
-			for (int i = 0; i < a; i++)
-			{
-				
-				vers[i] = -1;
-			}
+            for (int k = 0; k < net.Pins.Length; k++)
+            {
 
-			vers[node1] = front;
-			//распространение волны
-			for (; vers[node2] < 0; )
-			{
-				for (int i = 0; i < graph.Length; i++)
-				{
-					if (vers[i] == front)
-					{
-						for (int j = 0; j < graph[i].Length; j++)
-						{
-							if (vers[graph[i][j]] == -1)
-							{
-								vers[graph[i][j]] = front + 1;
-							}
-						}
-					}
-				}
-				front++;
-			}
+                int node1 = pins[k][0];
+                int node2 = pins[k][1];
 
-			int way = front--;
+                List<int> track = new List<int>();
+                List<int> top = new List<int>();
+                top.Add(node1);
+                List<int> previoustop = new List<int>();
+                previoustop.Add(-1);
 
-			List<int> optway = new List<int>(way);
-			
-			int v = node2;
-			
-			front = vers[node2];
-			//обратнй ход поиск пути
-			for (; front >  0;)
-			{
-				for (int i = 0; i < graph[v].Length; i++)
-				{
-					if (vers[graph[v][i]] == front - 1) {
-						
-						optway.Add(graph[v][i]);
-						v = graph[v][i];
-						break;
-					}
+                for (int i = 0; i < a; i++)
+                {
+                    vers[i] = -1;
+                }
 
-				}
-				front--;
-			}
-			optway.Reverse();
-			tracks[0] = new int[way];
-			for (int i = 0; i < optway.Count; i++)
-			{
-				tracks[0][i] = optway[i];
-			}
-			
+                vers[node1] = 0;
 
 
-			return new Solution(net.Pins, tracks);
+                //распространение волны
+                for (int i = 0; i < a; i++)
+                {
+                    if (top[i] == node2)
+                    {
+                        break;
+                    }
+                    for (int j = 0; j < graph[top[i]].Length; j++)
+                    {
+                        if (vers[graph[top[i]][j]] == -1)
+                        {
+                            vers[graph[top[i]][j]] = 0;
+                            top.Add(graph[top[i]][j]);
+                            previoustop.Add(top[i]);
+                        }
+
+                    }
+                }
+                //
+
+                //обратный ход
+                track.Add(node2);
+                for (int i = 0; i < top.Count; i++)
+                {
+
+                    int pos = top.IndexOf(track[i]);
+                    track.Add(previoustop[pos]);
+                    if (previoustop[pos] == node1)
+                    {
+                        break;
+                    }
+
+                }
+                //
+
+
+                track.Reverse();
+                tracks[k] = new int[track.Count];
+                for (int i = 0; i < track.Count; i++)
+                {
+                    tracks[k][i] = track[i];
+                }
+            }
+            return new Solution(net.Pins, tracks);
         }
 
         public bool checkSolution(Net net, Solution solution)
@@ -130,59 +136,10 @@ namespace algorithm
                 }
             }
             return result;
-		}
+        }
 
-		public static Solution searchSolution(Net net) {
-			int[][] pins = net.Pins;
-			int[][] tracks = new int[net.Pins.Length][];
-			int[][] graph = net.Graph;
-			int a = graph.Length;
-			int[,] vers = new int[2,a];
-			int[] optway = new int[a];
-			for (int i = 0; i < a; i++)
-			{
-				vers[0, i] = i;
-				vers[1, i] = -1;
-				optway[i] = 0; 
-			}
-			
-			int pin1 = pins[0][0];//пины которые нуно соединить
-			int pin2 = pins[0][1];//пины которые нуно соединить
-			int d;
-			//vers[1, 0] = 0;
-			for (int i = 0; i < a; i++)                        
-			{
-				if (graph[i].Length != 0)
-				{
-					d = vers[1, i] + 1;
-					for (int j = 0; j < graph[i].Length; j++)
-					{
-						if (vers[1, graph[i][j]] == -1)
-						{
-							vers[1, graph[i][j]] = d;
-						}
 
-					}
-				}
-			}
-			int v = vers[1, pin1];
-			int k = 0;
-			for (int j = pin1; j != pin2; )						
-			{
-				for (int i = 0; i < graph[j].Length; i++)	
-				{
-					if (vers[1, graph[j][i]] == v - 1) { optway[k] = graph[j][i]; break; }								
-				}
-				j = optway[k];
-				v = vers[1, optway[k]];
-				k++;
-			}													
-			
+        
 
-			return new Solution(pins, tracks);
-		}
-
-		
-
-	}
+    }
 }
