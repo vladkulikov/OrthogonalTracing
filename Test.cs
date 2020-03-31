@@ -69,24 +69,18 @@ namespace TestTrace
             Solution decision = Parser.getSolution("C:/Users/Vladiashik/Desktop/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
-            int[][] track = new int[3][];
-            track[0] = new int[12] { 15, 14, 13, 23, 33, 32, 31, 41, 51, 61, 71, 81 };
-            track[1] = new int[4] { 64, 63, 62, 61 };
-            track[2] = new int[2] { 73, 63 };
-
-       
+            int[] track = {  15, 14, 13, 23, 33, 32, 31, 41, 51, 61, 71, 81 ,  64, 63, 62, 61 ,  73, 63  };      
             bool trace = true;
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < sol.Tracks[i].Length; j++)
+
+                for (int i = 0; i < sol.Tracks[0].Length; i++)
                 {
-                    if (track[i][j] != sol.Tracks[i][j])
+                    if (track[i] != sol.Tracks[0][i])
                     {
                         trace = false;
                         break;
                     }
                 }
-            }
+ 
            
             Assert.AreEqual(true, trace);
 
