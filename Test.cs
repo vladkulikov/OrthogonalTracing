@@ -65,11 +65,11 @@ namespace TestTrace
         [TestMethod]
         public void TestTrace4pins()
         {
-            Net test = Parser.getData("C:/Users/Vladiashik/Desktop/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
-            Solution decision = Parser.getSolution("C:/Users/Vladiashik/Desktop/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
+            Net test = Parser.getData("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
+            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
-            int[] track = {  15, 14, 13, 23, 33, 32, 31, 41, 51, 61, 71, 81 ,  64, 63, 62, 61 ,  73, 63  };      
+            int[] track = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 3, 2, -1, -1, -1, -1, -1, -1, 1, -1, 3, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };      
             bool trace = true;
 
                 for (int i = 0; i < sol.Tracks[0].Length; i++)
@@ -89,18 +89,13 @@ namespace TestTrace
         [TestMethod]
         public void TestTrace2pins()
         {
-            Net test = Parser.getData("C:/Users/Vladiashik/Desktop/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
-            Solution decision = Parser.getSolution("C:/Users/Vladiashik/Desktop/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
+            Net test = Parser.getData("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
+            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
-            int[] track = { 15, 14, 13, 23, 33, 32, 31, 41, 51, 61, 71, 81 };
+            int[] track = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
             bool trace = true;
-            if (sol.Tracks[0].Length != 12) {
-                trace = false;
-            }
-            else
-            {
-                for (int i = 0; i < sol.Tracks[0].Length; i++)
+              for (int i = 0; i < sol.Tracks[0].Length; i++)
                 {
                     if (track[i] != sol.Tracks[0][i])
                     {
@@ -108,7 +103,7 @@ namespace TestTrace
                         break;
                     }
                 }
-            }
+            
 
             Assert.AreEqual(true, trace);
         }
