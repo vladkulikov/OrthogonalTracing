@@ -66,15 +66,14 @@ namespace TestTrace
         public void TestTrace4pins()
         {
             Net test = Parser.getData("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
-            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
+            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/Эталон4.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
-            int[] track = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 3, 2, -1, -1, -1, -1, -1, -1, 1, -1, 3, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };      
             bool trace = true;
 
                 for (int i = 0; i < sol.Tracks[0].Length; i++)
                 {
-                    if (track[i] != sol.Tracks[0][i])
+                    if (decision.Tracks[0][i] != sol.Tracks[0][i])
                     {
                         trace = false;
                         break;
@@ -90,14 +89,13 @@ namespace TestTrace
         public void TestTrace2pins()
         {
             Net test = Parser.getData("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
-            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
+            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/Эталон2.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
-            int[] track = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
             bool trace = true;
               for (int i = 0; i < sol.Tracks[0].Length; i++)
                 {
-                    if (track[i] != sol.Tracks[0][i])
+                    if (decision.Tracks[0][i] != sol.Tracks[0][i])
                     {
                         trace = false;
                         break;
