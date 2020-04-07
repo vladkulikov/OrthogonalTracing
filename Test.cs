@@ -66,7 +66,7 @@ namespace TestTrace
         public void TestTrace4pins()
         {
             Net test = Parser.getData("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest4Pins.txt");
-            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/Эталон4.txt");
+            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/Эталон 4.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
             bool trace = true;
@@ -89,7 +89,7 @@ namespace TestTrace
         public void TestTrace2pins()
         {
             Net test = Parser.getData("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/DataForTest1Pin.txt");
-            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/Эталон2.txt");
+            Solution decision = Parser.getSolution("C:/Users/vadya/OneDrive/Рабочий стол/OrthogonalTracing-wavemethodopt/Эталон 1.txt");
             LevelAlgorithm alg = new LevelAlgorithm();
             Solution sol = alg.trace(test);
             bool trace = true;

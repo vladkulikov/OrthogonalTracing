@@ -13,8 +13,8 @@ namespace algorithm
         {
 
 
-
-            int[][] tracks = new int[net.Pins.Length][];
+            //List<int> test = new List<int>();
+            int[][] tracks = new int[1][];
             int[][] pins = net.Pins;
             int[][] graph = net.Graph;
             int a = graph.Length;
@@ -22,10 +22,10 @@ namespace algorithm
             int[] metal = new int[a];
             for (int i = 0; i < a; i++)
             {
-                metal[i] = -1;
+                metal[i] = 0;
             }
-            metal[pins[0][0]] = 0;
-            metal[pins[0][1]] = 0;
+            metal[pins[0][0]] = -1;
+            metal[pins[0][1]] = -1;
 
            
             for (int k = 0; k < net.Pins.Length; k++)
@@ -39,6 +39,7 @@ namespace algorithm
                 List<int> top = new List<int>();
                 top.Add(node1);
                 List<int> previoustop = new List<int>();
+               
                 previoustop.Add(-1);
 
                 for (int i = 0; i < a; i++)
@@ -52,7 +53,7 @@ namespace algorithm
                 //распространение волны
                 for (int i = 0; i < top.Count; i++)
                 {
-                    if ((metal[top[i]] != -1) && (i !=0) )
+                    if ((metal[top[i]] != 0) && (i !=0) )
                     {
                         node2 = top[i];
                         break;
@@ -87,12 +88,30 @@ namespace algorithm
 
 
                 track.Reverse();
-                tracks[k] = new int[track.Count];
+                
                 for (int i = 0; i < track.Count; i++)
                 {
-                    tracks[k][i] = track[i];
-                    metal[track[i]] = k + 1;
+                    //test.Add(track[i]);
+                    if (metal[track[i]] == 0)
+                    {
+                        metal[track[i]] = k + 1;
+                    }
+                    
+              
                 }
+                
+            }
+            for (int i = 0; i < pins.Length; i++)
+            {
+                for (int j = 0; j < pins[i].Length; j++)
+                {
+                    metal[pins[i][j]] = -i - 1;
+                }
+            }
+            tracks[0] = new int[a];
+            for (int i = 0; i < a; i++)
+            {
+                tracks[0][i] = metal[i];
             }
             return new Solution(net.Pins, tracks);
         }
